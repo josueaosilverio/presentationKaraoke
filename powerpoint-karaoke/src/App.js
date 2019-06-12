@@ -27,19 +27,6 @@ class App extends React.Component {
         this.setState({ backgroundNew: json.urls.small });
       })
   }
-  
-
-
-
-
-
-
-
-  //VARIABLES
-
-
-  //UNSPLASH GET RAND PHOTO
- 
 
 
   render(){
