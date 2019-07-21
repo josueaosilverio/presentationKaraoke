@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { toJson } from 'unsplash-js';
 import Unsplash from 'unsplash-js';
-import { UNSPLASH_ID, UNSPLASH_SECRET } from '../constants';
-
 
 const unsplash = new Unsplash({
-  applicationId: UNSPLASH_ID,
-  secret: UNSPLASH_SECRET
+  applicationId: process.env.REACT_APP_UNSPLASH_ID,
+  secret: process.env.REACT_APP_UNSPLASH_SECRET
 });
 
 
