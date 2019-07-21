@@ -12,7 +12,8 @@ const unsplash = new Unsplash({
 
 
 const App = () => {
-  const [backgroundNew, setBackgroundNew] = useState(null)
+  const [background, setBackground] = useState(null)
+  const [userName, setUserName] = useState(null)
 
   useEffect(() => {
     fetch()
@@ -23,23 +24,31 @@ const App = () => {
       .then(toJson)
       .then(json => {
         console.table(json);
-        setBackgroundNew(json.urls.full);
+        setBackground(json.urls.full);
+        setUserName(json.user.name);
       }).catch(err => {
         console.log(err);
       })
   }
 
 
-  if (!backgroundNew) return 'loading....';
+  if (!background) return 'loading...';
 
   return (
     <div className="App"  onClick={() => fetch()} >
       <div style={{
-        backgroundImage: `url(${backgroundNew})`, backgroundPosition: 'center',
+        backgroundImage: `url(${background})`, backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat', width: "100vw", height: "100vh"
       }} alt="imagem"></div>
+      <div z-index="3" style={{
+        position: 'absolute', left: 0, bottom: 0,
+        background: '#FFFFFF99', padding: "10px",
+      }}>
+        Photo by {userName}, on Unsplash.
+      </div>
     </div>
   )
+
 }
 export default App;
