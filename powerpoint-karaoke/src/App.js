@@ -20,7 +20,7 @@ const App = () => {
   }, []);
 
   function fetch() {
-    unsplash.photos.getRandomPhoto({ query: "videogame" })
+    unsplash.photos.getRandomPhoto({ count: "20" })
       .then(toJson)
       .then(json => {
         console.table(json);
