@@ -13,9 +13,11 @@ const unsplash = new Unsplash({
 
 const App = () => {
   const [background, setBackground] = useState(null)
+  const [imageCol, setImageCol] = useState(null)
   const [userName, setUserName] = useState(null)
+  const [userURL, setUserURL] = useState(null)
   const [screenNumber, setScreenNumber] = useState(null)
-  let currentSlide = 0;
+  const [currentSlide, setCurrentSlide] = useState(null)
 
   useEffect(() => { fetch() }, []);
 
@@ -23,29 +25,24 @@ const App = () => {
     unsplash.photos.getRandomPhoto({ count: "20" })
       .then(toJson)
       .then(json => {
-        console.table(json);
+        setImageCol(json);
         setBackground(json[0].urls.full);
         setUserName(json[0].user.name);
+        setUserURL(json[0].user.links.html);
+        setCurrentSlide(0);
+        console.log(json)
       }).catch(err => {
         console.log(err);
       })
   }
 
   function nextImage() {
+    setCurrentSlide(currentSlide + 1)
     if (currentSlide < 20) {
-      currentSlide++;
-      setBackground(currentSlide);
-      setUserName(currentSlide);
       randomNumber();
-    }
-    else {
-      currentSlide = -1;
-      return "Ended";
-    }
-
-    if (currentSlide === -1) {
-      currentSlide++;
-      fetch();
+      setBackground(imageCol[currentSlide].urls.full);
+      setUserName(imageCol[currentSlide].user.name);
+      console.log(currentSlide);
     }
   }
 
@@ -99,7 +96,7 @@ const App = () => {
         position: 'absolute', left: 0, bottom: 0,
         background: '#FFFFFF99', padding: "10px",
       }}>
-        Photo by {userName}, on Unsplash.
+        Photo by <a href={`${userURL}?utm_source=presentationKaraoke&utm_medium=referral`}>{userName}</a>, on <a href="https://unsplash.com/?utm_source=presentationKaraoke&utm_medium=referral">Unsplash</a>.
       </div>
     </div>
   )
