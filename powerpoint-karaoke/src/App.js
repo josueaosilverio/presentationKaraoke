@@ -16,19 +16,22 @@ const App = () => {
   const [userName, setUserName] = useState(null)
   const [screenNumber, setScreenNumber] = useState(null)
 
-  useEffect(() => {fetch()});
+  useEffect(() => {fetch()}, []);
 
   function fetch() {
     unsplash.photos.getRandomPhoto({ count: "20" })
       .then(toJson)
       .then(json => {
         console.table(json);
-        setBackground(json.urls.full);
-        setUserName(json.user.name);
-        randomNumber();
+        setBackground(json[0].urls.full);
+        setUserName(json[0].user.name);
       }).catch(err => {
         console.log(err);
       })
+  }
+
+  function nextImage(){
+
   }
 
   function randomNumber() {
@@ -53,7 +56,7 @@ const App = () => {
   if (!background) return 'loading...';
 
   return (
-    <div className="App" onClick={() => fetch()} >
+    <div className="App" onClick={() => nextImage()} >
       {/*Photo */}
       <div style={{
         backgroundImage: `url(${background})`, backgroundPosition: 'center',
