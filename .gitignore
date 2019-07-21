@@ -82,4 +82,5 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
-powerpoint-karaoke/src/constants\.js
+
+# Custom ignores
