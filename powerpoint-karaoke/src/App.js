@@ -15,8 +15,9 @@ const App = () => {
   const [background, setBackground] = useState(null)
   const [userName, setUserName] = useState(null)
   const [screenNumber, setScreenNumber] = useState(null)
+  let currentSlide = 0;
 
-  useEffect(() => {fetch()}, []);
+  useEffect(() => { fetch() }, []);
 
   function fetch() {
     unsplash.photos.getRandomPhoto({ count: "20" })
@@ -30,8 +31,16 @@ const App = () => {
       })
   }
 
-  function nextImage(){
-
+  function nextImage() {
+    if (currentSlide < 20) {
+      currentSlide++;
+      setBackground(currentSlide);
+      setUserName(currentSlide);
+      randomNumber();
+    }
+    else{
+      return "Ended";
+    }
   }
 
   function randomNumber() {
@@ -45,7 +54,7 @@ const App = () => {
       if (percentageChance) {
         number = number.toString() + "%"
       }
-    }else{
+    } else {
       number = "";
     }
     setScreenNumber(number);
@@ -73,7 +82,7 @@ const App = () => {
           color: 'white',
           WebkitTextStroke: "3px black", fontSize: "12rem",
           top: "50%", left: "50%",
-          marginRight: "-50%", 
+          marginRight: "-50%",
           transform: "translate(-50%, -50%)"
         }} >
         {screenNumber}
