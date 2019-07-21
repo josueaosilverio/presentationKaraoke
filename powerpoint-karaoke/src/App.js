@@ -38,8 +38,14 @@ const App = () => {
       setUserName(currentSlide);
       randomNumber();
     }
-    else{
+    else {
+      currentSlide = -1;
       return "Ended";
+    }
+
+    if (currentSlide === -1) {
+      currentSlide++;
+      fetch();
     }
   }
 
