@@ -7,7 +7,7 @@ const App = () => {
   return (
     <div className="App" >
       <div>
-             {Slide()}
+            <Slide></Slide>
       </div>
     </div>
   )
