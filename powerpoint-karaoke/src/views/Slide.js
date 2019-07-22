@@ -8,7 +8,15 @@ const unsplash = new Unsplash({
 });
 
 
-const Slide = () => {
+const Slide = (props) => {
+
+  const{
+    topic = "",
+    slideNumber = 20,
+    slideTime = 30,
+  } = props;
+
+
   const [background, setBackground] = useState(null)
   const [imageCol, setImageCol] = useState(null)
   const [userName, setUserName] = useState(null)
@@ -19,7 +27,7 @@ const Slide = () => {
   useEffect(() => { fetch() }, []);
 
   function fetch() {
-    unsplash.photos.getRandomPhoto({ count: "20" })
+    unsplash.photos.getRandomPhoto({ count: slideNumber, query: topic })
       .then(toJson)
       .then(json => {
         setImageCol(json);
