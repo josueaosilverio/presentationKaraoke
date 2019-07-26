@@ -58,10 +58,9 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://github.com/josueaosilverio/presentationKaraoke)
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
+PowerPoint Karaoke, also known as Battledecks or Battle Decks, is an improvisational activity in which a participant must deliver a presentation based on a set of slides that they have never seen before. Its name is derived from Microsoft PowerPoint, a popular presentation software, and karaoke, an activity in which a performer sings along with a pre-recorded backing track (although there is usually no music or singing involved in PowerPoint Karaoke). The effect is intended to be comical, and PowerPoint Karaoke can be considered a form of improvisational theatre, or a type of Theatresports game.
 
-Here's why:
-
+This projecto makes the process faster and more fun by making a completely random presentation using images, numbers and words.
 
 ### Built With
 * [Bootstrap](https://getbootstrap.com)
