@@ -10,7 +10,7 @@ const unsplash = new Unsplash({
 
 const Slide = (props) => {
 
-  const{
+  const {
     topic = "",
     slideNumber = 20,
     slideTime = 30,
@@ -21,8 +21,8 @@ const Slide = (props) => {
   const [imageCol, setImageCol] = useState(null)
   const [userName, setUserName] = useState(null)
   const [userURL, setUserURL] = useState(null)
-  const [screenNumber, setScreenNumber] = useState(null)
-  const [currentSlide, setCurrentSlide] = useState(null)
+  const [screenNumber, setScreenNumber] = useState("Click to start")
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   useEffect(() => { fetch() }, []);
 
@@ -31,10 +31,9 @@ const Slide = (props) => {
       .then(toJson)
       .then(json => {
         setImageCol(json);
-        setBackground(json[0].urls.full);
-        setUserName(json[0].user.name);
-        setUserURL(json[0].user.links.html);
-        setCurrentSlide(0);
+        setBackground(json[currentSlide].urls.full);
+        setUserName(json[currentSlide].user.name);
+        setUserURL(json[currentSlide].user.links.html);
         console.log(json)
       }).catch(err => {
         console.log(err);
@@ -42,12 +41,14 @@ const Slide = (props) => {
   }
 
   function nextImage() {
-    setCurrentSlide(currentSlide + 1)
+    setCurrentSlide(currentSlide+1);
     if (currentSlide < 20) {
       randomNumber();
       setBackground(imageCol[currentSlide].urls.full);
       setUserName(imageCol[currentSlide].user.name);
       console.log(currentSlide);
+    } else {
+      console.log("End");
     }
   }
 

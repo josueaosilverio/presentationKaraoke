@@ -8,8 +8,8 @@ const App = () => {
   return (
     <div className="App" >
       <div>
-            <Settings></Settings>
-            {/* <Slide></Slide> */}
+            {/* <Settings></Settings> */}
+            <Slide slideTime="10"></Slide>
             
       </div>
     </div>
