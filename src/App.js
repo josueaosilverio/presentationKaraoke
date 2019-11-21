@@ -1,18 +1,27 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 import './App.css';
 import Slide from './views/Slide'
 import Settings from './views/Settings';
 
-const App = () => {
 
+const App = () => {
   return (
-    <div className="App" >
+
+    <Router>
       <div>
-            {/* <Settings></Settings> */}
-            <Slide slideTime="10"></Slide>
-            
+        <Switch>
+          <Route path="/presentation" component={Slide}>
+          </Route>
+          <Route path="/" component={Settings}>
+          </Route>
+        </Switch>
       </div>
-    </div>
+    </Router >
   )
 
 }

@@ -10,11 +10,22 @@ const unsplash = new Unsplash({
 
 const Slide = (props) => {
 
-  const {
+  let {
     topic = "",
     slideNumber = 20,
     slideTime = 30,
   } = props;
+
+  let params = new URLSearchParams(props.location.search);
+  
+  let tag = params.get("topic");
+  topic = tag;
+  
+  tag = params.get("slideNumber");
+  slideNumber = tag;
+
+  tag = params.get("slideTime");
+  slideTime = tag;
 
 
   const [background, setBackground] = useState(null)
@@ -24,6 +35,7 @@ const Slide = (props) => {
   const [screenNumber, setScreenNumber] = useState("Click to start")
   const [currentSlide, setCurrentSlide] = useState(0)
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { fetch() }, []);
 
   function fetch() {
@@ -34,22 +46,23 @@ const Slide = (props) => {
         setBackground(json[currentSlide].urls.full);
         setUserName(json[currentSlide].user.name);
         setUserURL(json[currentSlide].user.links.html);
-        console.log(json)
+        //console.log(json)
       }).catch(err => {
-        console.log(err);
+        //console.log(err);
       })
   }
 
   function nextImage() {
-    setCurrentSlide(currentSlide+1);
+    setCurrentSlide(currentSlide + 1);
     if (currentSlide < 20) {
       randomNumber();
       setBackground(imageCol[currentSlide].urls.full);
       setUserName(imageCol[currentSlide].user.name);
-      console.log(currentSlide);
+      //console.log(currentSlide);
     } else {
-      console.log("End");
+      //console.log("End");
     }
+    setTimeout(nextImage, slideTime * 1000)
   }
 
   function randomNumber() {
