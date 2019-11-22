@@ -7,7 +7,6 @@ const unsplash = new Unsplash({
   secret: process.env.REACT_APP_UNSPLASH_SECRET
 });
 
-
 const Slide = (props) => {
 
   let {
@@ -17,10 +16,11 @@ const Slide = (props) => {
   } = props;
 
   let params = new URLSearchParams(props.location.search);
-  
+
+
   let tag = params.get("topic");
   topic = tag;
-  
+
   tag = params.get("slideNumber");
   slideNumber = tag;
 
@@ -43,26 +43,28 @@ const Slide = (props) => {
       .then(toJson)
       .then(json => {
         setImageCol(json);
-        setBackground(json[currentSlide].urls.full);
+        setBackground(json[currentSlide].urls.regular);
         setUserName(json[currentSlide].user.name);
         setUserURL(json[currentSlide].user.links.html);
-        //console.log(json)
+        console.log(json)
       }).catch(err => {
         //console.log(err);
       })
+
+
   }
+
 
   function nextImage() {
     setCurrentSlide(currentSlide + 1);
     if (currentSlide < 20) {
       randomNumber();
-      setBackground(imageCol[currentSlide].urls.full);
+      setBackground(imageCol[currentSlide].urls.regular);
       setUserName(imageCol[currentSlide].user.name);
-      //console.log(currentSlide);
+
     } else {
-      //console.log("End");
+      window.location = "/";
     }
-    setTimeout(nextImage, slideTime * 1000)
   }
 
   function randomNumber() {
@@ -70,7 +72,7 @@ const Slide = (props) => {
     let percentageChance = Math.floor(Math.random() * 2);
     let number;
 
-    if (chance < 20) {
+    if (chance < 15) {
       number = Math.floor(Math.random() * 101);
 
       if (percentageChance) {
@@ -84,7 +86,7 @@ const Slide = (props) => {
   }
 
 
-  if (!background) return 'loading...';
+ if (!background) return 'loading...';
 
   return (
     <div onClick={() => nextImage()} >
@@ -116,6 +118,14 @@ const Slide = (props) => {
         background: '#FFFFFF99', padding: "10px",
       }}>
         Photo by <a href={`${userURL}?utm_source=presentationKaraoke&utm_medium=referral`}>{userName}</a>, on <a href="https://unsplash.com/?utm_source=presentationKaraoke&utm_medium=referral">Unsplash</a>.
+      </div>
+
+
+      {/* Slide Bar */}
+      <div z-index="3" style={{
+        position: 'absolute', top: 0, left: 0,
+        background: '#FFFFFFBB', width: (window.innerWidth / slideNumber) * currentSlide + "px", height: "7px"
+      }}>
       </div>
     </div>
   )
